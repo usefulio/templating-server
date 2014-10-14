@@ -1,6 +1,7 @@
 Package.describe({
   summary: "Allows templates to be defined in .html files",
-  version: '1.0.8'
+  version: '1.0.8',
+  name: 'cwohlman:templating-server'
 });
 
 // Today, this package is closely intertwined with Handlebars, meaning
@@ -19,11 +20,12 @@ Package._transitional_registerBuildPlugin({
 
 // This on_use describes the *runtime* implications of using this package.
 Package.on_use(function (api) {
+  api.versionsFrom('0.9.3');
   // XXX would like to do the following only when the first html file
   // is encountered
 
-  api.add_files('templating.js');
-  api.export('Template');
+  api.add_files('templating.js', 'server');
+  api.export('Template', 'server');
 
   api.use('underscore'); // only the subset in packages/blaze/microscore.js
 
@@ -32,19 +34,4 @@ Package.on_use(function (api) {
   // 'meteor' and 'blaze'.
   api.use('blaze');
   api.imply(['meteor', 'blaze', 'spacebars']);
-});
-
-Package.on_test(function (api) {
-  api.use('tinytest');
-  api.use('htmljs');
-  api.use('templating');
-  api.use('underscore');
-  api.use(['test-helpers', 'session', 'tracker',
-           'minimongo'], 'client');
-  api.use('spacebars-compiler');
-
-  api.add_files([
-    'plugin/html_scanner.js',
-    'scanner_tests.js'
-  ], 'server');
 });
