@@ -22,8 +22,8 @@ Package.on_use(function (api) {
   // XXX would like to do the following only when the first html file
   // is encountered
 
-  api.add_files('templating.js', 'client');
-  api.export('Template', 'client');
+  api.add_files('templating.js');
+  api.export('Template');
 
   api.use('underscore'); // only the subset in packages/blaze/microscore.js
 

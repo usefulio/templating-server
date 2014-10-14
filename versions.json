@@ -71,7 +71,7 @@
   ],
   "pluginDependencies": [
     [
-      "compileServerTemplates",
+      "compileTemplates",
       {
         "spacebars-compiler": "1.0.3",
         "deps": "1.0.5",

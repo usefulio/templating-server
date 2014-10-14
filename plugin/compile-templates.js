@@ -18,12 +18,6 @@ var doHTMLScanning = function (compileStep, htmlScanner) {
       throw e;
   }
 
-  if (results.head)
-    compileStep.appendDocument({ section: "head", data: results.head });
-
-  if (results.body)
-    compileStep.appendDocument({ section: "body", data: results.body });
-
   if (results.js) {
     var path_part = path.dirname(compileStep.inputPath);
     if (path_part === '.')
@@ -44,7 +38,7 @@ var doHTMLScanning = function (compileStep, htmlScanner) {
 };
 
 Plugin.registerSourceHandler(
-  "html", {isTemplate: true, archMatching: 'web'},
+  "html", {isTemplate: true},
   function (compileStep) {
     doHTMLScanning(compileStep, html_scanner);
   }
