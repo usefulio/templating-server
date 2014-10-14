@@ -61,6 +61,14 @@
       "1.0.3"
     ],
     [
+      "spacebars",
+      "1.0.3"
+    ],
+    [
+      "templating",
+      "1.0.8"
+    ],
+    [
       "tracker",
       "1.0.3"
     ],
@@ -71,7 +79,7 @@
   ],
   "pluginDependencies": [
     [
-      "compileTemplates",
+      "compileServerTemplates",
       {
         "spacebars-compiler": "1.0.3",
         "deps": "1.0.5",

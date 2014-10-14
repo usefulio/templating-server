@@ -9,7 +9,7 @@ Package.describe({
 // registry and a default templating system, ideally per-package.
 
 Package._transitional_registerBuildPlugin({
-  name: "compileTemplates",
+  name: "compileServerTemplates",
   use: ['spacebars-compiler'],
   sources: [
     'plugin/html_scanner.js',
@@ -31,7 +31,7 @@ Package.on_use(function (api) {
   // Blaze, so anybody using templating (eg apps) need to implicitly use
   // 'meteor' and 'blaze'.
   api.use('blaze');
-  api.imply(['meteor', 'blaze'], 'client');
+  api.imply(['meteor', 'blaze', 'spacebars']);
 });
 
 Package.on_test(function (api) {
