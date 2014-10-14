@@ -1,7 +1,8 @@
 Package.describe({
   summary: "Allows templates to be defined in .html files",
   version: '1.0.8',
-  name: 'cwohlman:templating-server'
+  name: 'cwohlman:templating-server',
+  git: 'git@github.com:cwohlman/meteor-templating-server.git'
 });
 
 // Today, this package is closely intertwined with Handlebars, meaning
