@@ -1,14 +1,12 @@
 Package.describe({
-  summary: "Allows templates to be defined in .html files",
-  version: '1.0.8',
+  summary: "Allows templates to be defined in .spacebars files (client or server)",
+  version: '1.0.8_2',
   name: 'cwohlman:templating-server',
   git: 'git@github.com:cwohlman/meteor-templating-server.git'
 });
 
-// Today, this package is closely intertwined with Handlebars, meaning
-// that other templating systems will need to duplicate this logic. In
-// the future, perhaps we should have the concept of a template system
-// registry and a default templating system, ideally per-package.
+// This package is a close copy of the templating package, with the exception
+// that it processes files on both client and server
 
 Package._transitional_registerBuildPlugin({
   name: "compileServerTemplates",
