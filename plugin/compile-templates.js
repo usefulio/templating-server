@@ -38,7 +38,7 @@ var doHTMLScanning = function (compileStep, htmlScanner) {
 };
 
 Plugin.registerSourceHandler(
-  "html", {isTemplate: true},
+  "spacebars",
   function (compileStep) {
     doHTMLScanning(compileStep, html_scanner);
   }
