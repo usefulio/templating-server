@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Allows templates to be defined in .spacebars files (client or server)",
-  version: '1.0.8_2',
+  version: '1.0.8_3',
   name: 'cwohlman:templating-server',
   git: 'git@github.com:cwohlman/meteor-templating-server.git'
 });
