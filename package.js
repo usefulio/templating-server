@@ -1,36 +1,56 @@
 Package.describe({
-  summary: "Allows templates to be defined in .spacebars files (client or server)",
-  version: '1.0.8_3',
+  summary: "Allows templates to be defined in .html files",
+  version: '1.1.8_1',
   name: 'cwohlman:templating-server',
-  git: 'git@github.com:cwohlman/meteor-templating-server.git'
 });
 
 // This package is a close copy of the templating package, with the exception
 // that it processes files on both client and server
 
-Package._transitional_registerBuildPlugin({
-  name: "compileServerTemplates",
-  use: ['spacebars-compiler'],
+Package.registerBuildPlugin({
+  name: "compileTemplatesBatch",
+  // minifier-js is a weak dependency of spacebars-compiler; adding it here
+  // ensures that the output is minified.  (Having it as a weak dependency means
+  // that we don't ship uglify etc with built apps just because
+  // boilerplate-generator uses spacebars-compiler.)
+  // XXX maybe uglify should be applied by this plugin instead of via magic
+  // weak dependency.
+  use: [
+    'caching-html-compiler',
+    'ecmascript',
+    'templating-tools'
+  ],
   sources: [
-    'plugin/html_scanner.js',
     'plugin/compile-templates.js'
   ]
 });
 
-// This on_use describes the *runtime* implications of using this package.
-Package.on_use(function (api) {
-  api.versionsFrom('0.9.3');
+// This onUse describes the *runtime* implications of using this package.
+Package.onUse(function (api) {
   // XXX would like to do the following only when the first html file
   // is encountered
 
-  api.add_files('templating.js', 'server');
+  api.addFiles('templating.js');
   api.export('Template', 'server');
 
   api.use('underscore'); // only the subset in packages/blaze/microscore.js
 
+  api.use('isobuild:compiler-plugin@1.0.0');
+
   // html_scanner.js emits client code that calls Meteor.startup and
   // Blaze, so anybody using templating (eg apps) need to implicitly use
   // 'meteor' and 'blaze'.
-  api.use('blaze');
+  api.use(['blaze', 'spacebars']);
   api.imply(['meteor', 'blaze', 'spacebars']);
+});
+
+Package.onTest(function (api) {
+  api.use('cwohlman:templating-server');
+
+  api.use('ecmascript');
+  api.use('underscore');
+  api.use('tinytest');
+
+  api.addFiles('templating-tests.spacebars', 'server');
+  api.addFiles('templating-tests.js', 'server');
 });
